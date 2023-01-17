@@ -71,6 +71,8 @@
                             const { expired, token } = res.data;
                             console.log(expired)
                             console.log(token)
+                            document.cookie = `hexToken:${token};expired:${new Date(expired)};`;//存到cookie
+                            window.location = './products.html';
                         }).catch((err) => {
                             console.log('err', err)
                         });
