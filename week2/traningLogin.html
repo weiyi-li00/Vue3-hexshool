@@ -67,7 +67,10 @@
                     const path = '2ndclothes'
                     axios.post(`${URL}/v2/admin/signin`, this.user)
                         .then((res) => {
-                            console.log(res)
+                            // console.log(res)
+                            const { expired, token } = res.data;
+                            console.log(expired)
+                            console.log(token)
                         }).catch((err) => {
                             console.log('err', err)
                         });
