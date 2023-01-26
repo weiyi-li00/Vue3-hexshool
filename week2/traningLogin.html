@@ -34,21 +34,21 @@
 <body>
 
     <div id="app">
-        <!-- <form class="form-signin"> -->
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" v-model="user.username" id="floatingInput"
-                placeholder="name@example.com" required autofocus>
-            <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" v-model="user.password" id="floatingPassword"
-                placeholder="Password" required>
-            <label for="floatingPassword">Password</label>
-        </div>
-        <button class="btn btn-lg btn-primary w-100 mt-3" type="submit" @click='loginBtn()'>
-            登入
-        </button>
-        <!-- </form> -->
+        <form class="form-signin" @submit.prevent="loginBtn">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" v-model="user.username" id="floatingInput"
+                    placeholder="name@example.com" required autofocus>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" v-model="user.password" id="floatingPassword"
+                    placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
+                登入
+            </button>
+        </form>
     </div>
     <script type="module">
         const { createApp } = Vue
@@ -63,19 +63,17 @@
             },
             methods: {
                 loginBtn() {
-                    const URL = 'https://vue3-course-api.hexschool.io/';
-                    const path = '2ndclothes'
-                    axios.post(`${URL}/v2/admin/signin`, this.user)
-                        .then((res) => {
-                            console.log(res)
-                            if (res.data.success === false) return alert('密碼輸入錯誤！請重新輸入');
-                            const { expired, token } = res.data;
-                            document.cookie = `hexToken=${token};expires=${new Date(expired)};`;//存到cookie
-                            window.location = './products.html';
-                        }).catch((err) => {
-                            alert(err.response.data.message);
-                            window.location = './login.html';
-                        });
+                    const URL = ' https://vue3-course-api.hexschool.io/'; const path = '2ndclothes'
+                    axios.post(`${URL}/v2/admin/signin`, this.user).then((res) => {
+                        console.log(res)
+                        if (res.data.success === false) return alert('密碼輸入錯誤！請重新輸入');
+                        const { expired, token } = res.data;
+                        document.cookie = `hexToken=${token};expires=${new Date(expired)};`;//存到cookie
+                        window.location = './traningProducts.html';
+                    }).catch((err) => {
+                        alert(err.response.data.message);
+                        window.location = './traningLogin.html';
+                    });
                 }
             },
         });
