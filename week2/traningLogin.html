@@ -67,14 +67,14 @@
                     const path = '2ndclothes'
                     axios.post(`${URL}/v2/admin/signin`, this.user)
                         .then((res) => {
-                            // console.log(res)
+                            console.log(res)
+                            if (res.data.success === false) return alert('密碼輸入錯誤！請重新輸入');
                             const { expired, token } = res.data;
-                            console.log(expired)
-                            console.log(token)
-                            document.cookie = `hexToken:${token};expired:${new Date(expired)};`;//存到cookie
+                            document.cookie = `hexToken=${token};expires=${new Date(expired)};`;//存到cookie
                             window.location = './products.html';
                         }).catch((err) => {
-                            console.log('err', err)
+                            alert(err.response.data.message);
+                            window.location = './login.html';
                         });
                 }
             },
